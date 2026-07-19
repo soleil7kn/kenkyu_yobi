@@ -1,6 +1,6 @@
-import random
-import numpy as np
-import torch
+#import random
+#import numpy as np
+#import torch
 
 from data_provider.data_loader import (
     Dataset_ETT_hour, Dataset_ETT_minute, Dataset_Custom,
@@ -19,10 +19,12 @@ data_dict = {
     'custom': Dataset_Custom,
 }
 
+"""
 def seed_worker(worker_id):
     worker_seed = torch.initial_seed() % 2**32
     np.random.seed(worker_seed)
     random.seed(worker_seed)
+"""
 
 def data_provider(args, flag):
     Data = data_dict[args.data]
@@ -34,12 +36,12 @@ def data_provider(args, flag):
         batch_size = 1  # bsz=1 for evaluation
         freq = args.freq
     
-    elif flag == 'val':
+    #elif flag == 'val':
         # 検証データをシャッフルする必要はない
-        shuffle_flag = False
-        drop_last = True
-        batch_size = args.batch_size
-        freq = args.freq
+        #shuffle_flag = False
+        #drop_last = True
+        #batch_size = args.batch_size
+        #freq = args.freq
 
     elif flag == 'pred':
         shuffle_flag = False
@@ -65,7 +67,8 @@ def data_provider(args, flag):
         freq=freq,
     )
     print(flag, len(data_set))
-
+    
+    """
     # train / val / testごとに独立した乱数列を使う
     seed_offset = {
         'train': 0,
@@ -73,9 +76,11 @@ def data_provider(args, flag):
         'test': 2,
         'pred': 3,
     }
+    
 
     generator = torch.Generator()
     generator.manual_seed(args.seed + seed_offset[flag])
+    """
 
     data_loader = DataLoader(
         data_set,
@@ -83,6 +88,7 @@ def data_provider(args, flag):
         shuffle=shuffle_flag,
         num_workers=args.num_workers,
         drop_last=drop_last,
-        worker_init_fn=seed_worker,
-        generator=generator,)
+        #worker_init_fn=seed_worker,
+        #generator=generator,
+    )
     return data_set, data_loader
