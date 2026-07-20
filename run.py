@@ -7,7 +7,7 @@ import random
 import numpy as np
 
 if __name__ == '__main__':
-    fix_seed = 2021
+    fix_seed = 2026
     random.seed(fix_seed)
     torch.manual_seed(fix_seed)
     np.random.seed(fix_seed)
