@@ -1,6 +1,6 @@
 import os
 import torch
-from model import Transformer, Informer, Reformer, Flowformer, Flashformer, \
+from models import Transformer, Informer, Reformer, Flowformer, Flashformer, \
     iTransformer, iInformer, iReformer, iFlowformer, iFlashformer, SkipTimeformer, iTrans_Skip, \
     TimeMixer, TimeMixer_iTransformer
 
